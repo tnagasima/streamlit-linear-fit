@@ -6,10 +6,7 @@ from sklearn.linear_model import LinearRegression
 import matplotlib
 import os
 
-# 仮想環境 conda activate streamlit-fit
-# このファイルのフォルダにcdしてから，実行（ローカル）streamlit run linear_fit_app.py
-
-# フォントを Noto Sans CJK JP に変更
+# フォントを Noto Sans CJK JP に変更（matplotlib用）
 matplotlib.rcParams['font.family'] = 'Noto Sans CJK JP'
 matplotlib.rcParams['axes.unicode_minus'] = False
 
@@ -30,17 +27,18 @@ with col2:
 # タイトル下に水平線
 st.markdown("<hr style='margin-top: 0px; margin-bottom: 20px;'>", unsafe_allow_html=True)
 
-st.latex(r'''\ny = ax +b\n''')
+# 数式と説明文
+st.latex(r'y = ax + b')
 st.write("データを入力してから「計算実行」ボタンを押してください．")
 
 # 初期データフレーム（空のデータフレームを用意）
 if "data" not in st.session_state:
     st.session_state.data = pd.DataFrame({"X": [0.0], "Y": [0.0]})
 
-# データ入力テーブル（小数点以下任意桁まで入力可能に）
+# データ入力テーブル（小数点以下最大10桁まで入力可能）
 column_config = {
-    "X": st.column_config.NumberColumn("X", step=1e-10, format="%f"),
-    "Y": st.column_config.NumberColumn("Y", step=1e-10, format="%f")
+    "X": st.column_config.NumberColumn("X", step=1e-10, format="%.10f"),
+    "Y": st.column_config.NumberColumn("Y", step=1e-10, format="%.10f")
 }
 
 edited_df = st.data_editor(
@@ -76,11 +74,11 @@ if run:
         # 計算結果を中央に大きく表示
         st.markdown(f"""
         <div style='text-align: center; font-size: 24px; font-weight: bold; margin: 20px 0;'>
-            傾き a = {slope:.6f}<br>
-            切片 b = {intercept:.6f}<br>
+            傾き a = {slope:.10f}<br>
+            切片 b = {intercept:.10f}<br>
         </div>
         <div style='text-align: center; font-size: 18px; font-weight: bold; margin: 14px 0;'>
-            回帰直線の式: Y = {slope:.6f} × X + {intercept:.6f}<br>
+            回帰直線の式: Y = {slope:.10f} × X + {intercept:.10f}<br>
             決定係数 (R²): {r_squared:.6f}
          </div>
         """, unsafe_allow_html=True)
