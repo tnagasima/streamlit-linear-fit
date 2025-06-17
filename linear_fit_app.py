@@ -79,3 +79,17 @@ if run:
         </div>
         <div style='text-align: center; font-size: 18px; font-weight: bold; margin: 14px 0;'>
             回帰直線の式: Y = {slope:.10f} × X + {intercept:.10f}<br>
+            決定係数 (R²): {r_squared:.6f}
+        </div>
+        """, unsafe_allow_html=True)
+
+        # プロット
+        fig, ax = plt.subplots()
+        ax.scatter(X, Y, label="Data")
+        ax.plot(X, model.predict(X), color="red", label="y=ax+b")
+        ax.set_xlabel("X")
+        ax.set_ylabel("Y")
+        ax.legend()
+        st.pyplot(fig)
+    else:
+        st.warning("2行以上の有効なデータを入力してください。")
