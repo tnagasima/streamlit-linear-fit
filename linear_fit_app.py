@@ -35,10 +35,10 @@ st.write("データを入力してから「計算実行」ボタンを押して�
 if "data" not in st.session_state:
     st.session_state.data = pd.DataFrame({"X": [0.0], "Y": [0.0]})
 
-# データ入力テーブル（小数点以下最大10桁まで入力可能）
+# データ入力テーブル（小数点以下任意桁入力可、余分な0非表示）
 column_config = {
-    "X": st.column_config.NumberColumn("X", step=1e-10, format="%.10f"),
-    "Y": st.column_config.NumberColumn("Y", step=1e-10, format="%.10f")
+    "X": st.column_config.NumberColumn("X", step=1e-10),
+    "Y": st.column_config.NumberColumn("Y", step=1e-10)
 }
 
 edited_df = st.data_editor(
@@ -79,17 +79,3 @@ if run:
         </div>
         <div style='text-align: center; font-size: 18px; font-weight: bold; margin: 14px 0;'>
             回帰直線の式: Y = {slope:.10f} × X + {intercept:.10f}<br>
-            決定係数 (R²): {r_squared:.6f}
-         </div>
-        """, unsafe_allow_html=True)
-
-        # プロット
-        fig, ax = plt.subplots()
-        ax.scatter(X, Y, label="Data")
-        ax.plot(X, model.predict(X), color="red", label="y=ax+b")
-        ax.set_xlabel("X")
-        ax.set_ylabel("Y")
-        ax.legend()
-        st.pyplot(fig)
-    else:
-        st.warning("2行以上の有効なデータを入力してください。")
