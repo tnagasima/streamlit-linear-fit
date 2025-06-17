@@ -31,7 +31,7 @@ with col2:
 st.markdown("<hr style='margin-top: 0px; margin-bottom: 20px;'>", unsafe_allow_html=True)
 
 st.latex(r'''
-y = ax +b
+y = ax + b
 ''')
 st.write("データを入力してから「計算実行」ボタンを押してください．")
 
