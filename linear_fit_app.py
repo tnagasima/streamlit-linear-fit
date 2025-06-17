@@ -30,7 +30,6 @@ with col2:
 # タイトル下に水平線
 st.markdown("<hr style='margin-top: 0px; margin-bottom: 20px;'>", unsafe_allow_html=True)
 
-
 st.latex(r'''
 y = ax +b
 ''')
@@ -40,8 +39,18 @@ st.write("データを入力してから「計算実行」ボタンを押して�
 if "data" not in st.session_state:
     st.session_state.data = pd.DataFrame({"X": [0.0], "Y": [0.0]})
 
-# データ入力テーブル
-edited_df = st.data_editor(st.session_state.data, num_rows="dynamic", key="data_editor")
+# データ入力テーブル（列の型をfloatに指定して数値キーボードを表示させる）
+column_config = {
+    "X": st.column_config.NumberColumn("X", step=0.1),
+    "Y": st.column_config.NumberColumn("Y", step=0.1)
+}
+
+edited_df = st.data_editor(
+    st.session_state.data,
+    column_config=column_config,
+    num_rows="dynamic",
+    key="data_editor"
+)
 
 # ボタン右寄せ配置
 button_col1, button_col2, button_col3 = st.columns([6, 1, 2])
