@@ -37,8 +37,8 @@ if "data" not in st.session_state:
 
 # データ入力テーブル（小数点以下任意桁入力可、余分な0非表示）
 column_config = {
-    "X": st.column_config.NumberColumn("X", step=1e-10),
-    "Y": st.column_config.NumberColumn("Y", step=1e-10)
+    "X": st.column_config.NumberColumn("X", step=1e-10, format="%g"),
+    "Y": st.column_config.NumberColumn("Y", step=1e-10, format="%g")
 }
 
 edited_df = st.data_editor(
