@@ -6,8 +6,7 @@ from sklearn.linear_model import LinearRegression
 import matplotlib
 import os
 
-# フォントを Noto Sans CJK JP に変更（matplotlib用）
-matplotlib.rcParams['font.family'] = 'Noto Sans CJK JP'
+# フォントを Noto Sans CJK JP に変更（matplotlib用） matplotlib.rcParams['font.family'] = 'Noto Sans CJK JP'
 matplotlib.rcParams['axes.unicode_minus'] = False
 
 # ロゴ画像のパス（この .py ファイルと同じディレクトリにあると想定）
