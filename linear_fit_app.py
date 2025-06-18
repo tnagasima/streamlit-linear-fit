@@ -74,12 +74,12 @@ if run:
         # 計算結果を中央に大きく表示
         st.markdown(f"""
         <div style='text-align: center; font-size: 24px; font-weight: bold; margin: 20px 0;'>
-            傾き a = {slope:4g}<br>
-            切片 b = {intercept:.4g}<br>
+            傾き a = {slope:#.4g}<br>
+            切片 b = {intercept:#.4g}<br>
         </div>
         <div style='text-align: center; font-size: 18px; font-weight: bold; margin: 14px 0;'>
-            回帰直線の式: Y = {slope:4g} × X + {intercept:4g}<br>
-            決定係数 (R²): {r_squared:.3g}
+            回帰直線の式: Y = {slope:#.4g} × X + {intercept:#.4g}<br>
+            決定係数 (R²): {r_squared:#.3g}
         </div>
         """, unsafe_allow_html=True)
 
