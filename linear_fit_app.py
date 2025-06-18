@@ -29,8 +29,7 @@ st.markdown("<hr style='margin-top: 0px; margin-bottom: 20px;'>", unsafe_allow_h
 
 # 数式と説明文
 st.latex(r'y = ax + b')
-st.write("データを入力してから「計算実行」ボタンを押してください．")
-st.write("（iPadOS, iOSで小数点を入力できないときはキーボードのフローティングを解除してみてください）")
+st.write("データを入力してから「計算実行」ボタンを押してください．  （iPadOS, iOSで小数点を入力できないときはキーボードのフローティングを解除してみてください）")
 
 # 初期データフレーム（空のデータフレームを用意）
 if "data" not in st.session_state:
@@ -75,19 +74,19 @@ if run:
         # 計算結果を中央に大きく表示
         st.markdown(f"""
         <div style='text-align: center; font-size: 24px; font-weight: bold; margin: 20px 0;'>
-            傾き a = {slope:.10f}<br>
-            切片 b = {intercept:.10f}<br>
+            傾き a = {slope:4g}<br>
+            切片 b = {intercept:.4g}<br>
         </div>
         <div style='text-align: center; font-size: 18px; font-weight: bold; margin: 14px 0;'>
-            回帰直線の式: Y = {slope:.4f} × X + {intercept:.4f}<br>
-            決定係数 (R²): {r_squared:.3f}
+            回帰直線の式: Y = {slope:4g} × X + {intercept:4g}<br>
+            決定係数 (R²): {r_squared:.3g}
         </div>
         """, unsafe_allow_html=True)
 
         # プロット
         fig, ax = plt.subplots()
         ax.scatter(X, Y, label="Data")
-        ax.plot(X, model.predict(X), color="red", label=r'y = ax + b')
+        ax.plot(X, model.predict(X), color="red", label='y=ax+b')
         ax.set_xlabel("X")
         ax.set_ylabel("Y")
         ax.legend()
