@@ -29,8 +29,7 @@ st.markdown("<hr style='margin-top: 0px; margin-bottom: 20px;'>", unsafe_allow_h
 
 # 数式と説明文
 st.latex(r'y = ax + b')
-st.write("データを入力してから「計算実行」ボタンを押してください．
-指数表記（例 1.2e-3）でも入力可能です．")
+st.write("データを入力してから「計算実行」ボタンを押してください．指数表記（例 1.2e-3）でも入力可能です．")
 
 # 初期データフレーム（空のデータフレームを用意）
 if "data" not in st.session_state:
