@@ -6,7 +6,8 @@ from sklearn.linear_model import LinearRegression
 import matplotlib
 import os
 
-# フォントを Noto Sans CJK JP に変更（matplotlib用） matplotlib.rcParams['font.family'] = 'Noto Sans CJK JP'
+# フォントを Noto Sans CJK JP に変更（matplotlib用）
+matplotlib.rcParams['font.family'] = 'Noto Sans CJK JP'
 matplotlib.rcParams['axes.unicode_minus'] = False
 
 # ロゴ画像のパス（この .py ファイルと同じディレクトリにあると想定）
@@ -28,22 +29,17 @@ st.markdown("<hr style='margin-top: 0px; margin-bottom: 20px;'>", unsafe_allow_h
 
 # 数式と説明文
 st.latex(r'y = ax + b')
-st.write('''データを入力してから「計算実行」ボタンを押してください． ''')
+st.write("データを入力してから「計算実行」ボタンを押してください．")
 
 # 初期データフレーム（空のデータフレームを用意）
 if "data" not in st.session_state:
-st.session_state.data = pd.DataFrame({"X": ["0.0"], "Y": ["0.0"]})
+    st.session_state.data = pd.DataFrame({"X": ["0.0"], "Y": ["0.0"]})
 
 # データ入力テーブル（TextColumnで指数表記も許可）
 column_config = {
-"X": st.column_config.TextColumn("X（数値）", help="例: 1.2e12"),
-"Y": st.column_config.TextColumn("Y（数値）", help="例: 3.4e-5")
+    "X": st.column_config.TextColumn("X（数値）", help="例: 1.2e12"),
+    "Y": st.column_config.TextColumn("Y（数値）", help="例: 3.4e-5")
 }
-
-#column_config = {
-#    "X": st.column_config.NumberColumn("X", step=1e-10, format="%g"),
-#    "Y": st.column_config.NumberColumn("Y", step=1e-10, #format="%g")
-# }
 
 edited_df = st.data_editor(
     st.session_state.data,
@@ -65,7 +61,7 @@ if run:
     # 数値変換を試みる
     try:
         cleaned_df["X"] = cleaned_df["X"].astype(float)
-    cleaned_df["Y"] = cleaned_df["Y"].astype(float)
+        cleaned_df["Y"] = cleaned_df["Y"].astype(float)
     except ValueError:
         st.error("XまたはYに無効な数値があります（指数表記も可: 1.2e12 等）。")
         st.stop()
@@ -86,19 +82,19 @@ if run:
         # 計算結果を中央に大きく表示
         st.markdown(f"""
         <div style='text-align: center; font-size: 24px; font-weight: bold; margin: 20px 0;'>
-            傾き a = {slope:#.4g}<br>
-            切片 b = {intercept:#.4g}<br>
+            傾き a = {slope:.10f}<br>
+            切片 b = {intercept:.10f}<br>
         </div>
         <div style='text-align: center; font-size: 18px; font-weight: bold; margin: 14px 0;'>
-            回帰直線の式: Y = {slope:#.4g} × X + {intercept:#.4g}<br>
-            決定係数 (R²): {r_squared:#.3g}
+            回帰直線の式: Y = {slope:.10f} × X + {intercept:.10f}<br>
+            決定係数 (R²): {r_squared:.6f}
         </div>
         """, unsafe_allow_html=True)
 
         # プロット
         fig, ax = plt.subplots()
         ax.scatter(X, Y, label="Data")
-        ax.plot(X, model.predict(X), color="red", label='y=ax+b')
+        ax.plot(X, model.predict(X), color="red", label="y=ax+b")
         ax.set_xlabel("X")
         ax.set_ylabel("Y")
         ax.legend()
